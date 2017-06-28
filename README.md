@@ -12,3 +12,6 @@ end
 
 ### multi_routes.rb
 [use ActiveSupport::FileUpdateChecker for tracking changes in config/routes directory](https://gist.github.com/dhh/2492118#gistcomment-1189847)
+
+### define_class.rb
+[Ruby China: 缺失的 define_class](https://ruby-china.org/topics/17382)
