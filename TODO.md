@@ -4,5 +4,5 @@
 - [详解 Rails Controller 中的 Callback](https://ruby-china.org/topics/32357)
 - [ActiveRecord 中的 Callback 浅析](https://ruby-china.org/topics/22809)
 - [instance_eval + delegation](https://www.dan-manges.com/blog/ruby-dsls-instance-eval-with-delegation)
-
+- [Method namespace clashing when running rake tasks in Rails](https://stackoverflow.com/questions/7180732/method-namespace-clashing-when-running-rake-tasks-in-rails)
 
