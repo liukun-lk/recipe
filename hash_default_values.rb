@@ -21,3 +21,8 @@ hash.keys  #=> [:weekdays, :holidays]
 # we can use Hash#fetch
 hash = {}
 hash.fetch(:key, []) #=> return [] not nil
+
+
+# ---
+# and use reduce, should use Hash#update to update the initial value
+%w[1 2 3].reduce({}){ |hash, key| hash.update({ key => key.to_i }) } # => {"1"=>1, "2"=>2, "3"=>3}
