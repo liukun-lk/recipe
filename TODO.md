@@ -9,3 +9,5 @@
 
 - [Multithreaded ActiveRecord requests in rspec](https://stackoverflow.com/questions/2841361/multithreaded-activerecord-requests-in-rspec)
 - [we can’t just share a single IO instance between multiple threads](https://github.com/rails/activestorage/pull/17#discussion_r126639394)
+
+- [MessagePack](http://msgpack.org/) vs JSON
