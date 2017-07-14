@@ -49,10 +49,12 @@ end
 
 class Sku < ActiveRecord::Base
   belongs_to :product
+  has_many :bundle_skus
 end
 
 class BundleSku < ActiveRecord::Base
   belongs_to :product
+  belongs_to :sku
 end
 
 class BugTest < Minitest::Test
