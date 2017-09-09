@@ -86,16 +86,38 @@ t2.join
 
 repeatable_read 只能保证在当前事务下（同一事务里面）用户进行多次读同一数据库表的时候读出来的数据是相同的，不会因为两个查询过程之间有另一个会话对数据资源进行了更改，而导致两次查询的数据不一致。而且对于数据的修改操作，最好的做法是使用 `update_counters `，这样数据库帮你做了原子性更新。
 
-> **注意**：在可重复读(Repeatable Read)事务隔离级别，可以完全防止更新丢失(覆盖)的问题,如果当前事务读取了某行，这期间其他并发事务修改了这一行并提交了，然后当前事务试图更新该行时，PostgreSQL会提示: ERROR: could not serialize access due to concurrent update 事务会被回滚，只能重新开始。但是当数据库为 MySQL 时，即使是使用了 repeatable_read 的隔离条件，也不会出现上述的情况。
+> **注意**：在可重复读(Repeatable Read)事务隔离级别，可以完全防止更新丢失(覆盖)的问题,如果当前事务读取了某行，这期间其他并发事务修改了这一行并提交了，然后当前事务试图更新该行时，PostgreSQL 会提示: ERROR: could not serialize access due to concurrent update 事务会被回滚，只能重新开始。但是当数据库为 MySQL 时，即使是使用了 repeatable_read 的隔离条件，也不会出现上述的情况。
 
-下表是根据日志算出来的，每次执行日志时间都是不同的：
+~~下表是根据日志算出来的，每次执行日志时间都是不同的：~~
 |task|t1|t2|
 |:--:|:--:|:--:|
 |begin|1.8ms|0.6ms|
 |update|+1.9ms|+1.2ms|
 |commit|none|+1.2ms|
 
-可以看到，t1 的 begin 时间正好落于 t2 的 update 和 commit 时间间隔内，也就是说在 [1.8ms, 3ms] 这个区间范围内，并发的事务 t1，不能对同一数据库表的同一行数据进行修改操作。不然就会报错。如果 t1 的执行时间稍微延迟至少`sleep >0.002 s`，那么两条 update 操作都能够执行了。
+~~可以看到，t1 的 begin 时间正好落于 t2 的 update 和 commit 时间间隔内，也就是说在 [1.8ms, 3ms] 这个区间范围内，并发的事务 t1，不能对同一数据库表的同一行数据进行修改操作。不然就会报错。如果 t1 的执行时间稍微延迟至少`sleep >0.002 s`，那么两条 update 操作都能够执行了。~~
+
+```ruby
+t1 = Thread.new do
+  Order.transaction isolation: :repeatable_read do
+    sleep 1
+    x = Order.update_counters 1, stock: 4
+  end
+end
+t2 = Thread.new do
+  Order.transaction isolation: :repeatable_read do
+    x = Order.find 1 # 加上这句话之后 PostgreSQL 就会报 could not serialize access due to concurrent update 错误。
+    sleep 2
+    x = Order.find 1
+    x.stock += 5
+    x.save!
+  end
+end
+t1.join
+t2.join
+```
+
+目前就我理解是：看事务中是否使用到“快照读”。如果用到了，相当于第二次读出的数据在隔离性为 RR 级下会与第一次读出的数据相同。PostgreSQL 会直接拒绝修改数据。
 
 
 ----
