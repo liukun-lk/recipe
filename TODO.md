@@ -4,10 +4,50 @@
 - [详解 Rails Controller 中的 Callback](https://ruby-china.org/topics/32357)
 - [ActiveRecord 中的 Callback 浅析](https://ruby-china.org/topics/22809)
 - [instance_eval + delegation](https://www.dan-manges.com/blog/ruby-dsls-instance-eval-with-delegation)
-
 - [Method namespace clashing when running rake tasks in Rails](https://stackoverflow.com/questions/7180732/method-namespace-clashing-when-running-rake-tasks-in-rails)
-
 - [Multithreaded ActiveRecord requests in rspec](https://stackoverflow.com/questions/2841361/multithreaded-activerecord-requests-in-rspec)
 - [we can’t just share a single IO instance between multiple threads](https://github.com/rails/activestorage/pull/17#discussion_r126639394)
-
 - [MessagePack](http://msgpack.org/) vs JSON
+- 容灾模拟框架
+- simulating network(shopify/toxiproxy)
+- https://www.zhihu.com/question/20895638 raft pexos
+- plantuml 画图（先是类图，从大的层面去把握这个代码的结构。对复杂的交互流程才画时序图。）
+- 缓存雪崩、缓存穿透、缓存预热、缓存更新、缓存降级
+- 固定处理器工具（在 Linux 上可以使用 taskset）: Redis 的性能还依赖NUMA 配置和处理器绑定位置
+- zookeeper etcd consul 发现配置服务
+- [(HashKey + SortKey)的二级键](https://github.com/xiaomi/pegasus/wiki/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B)
+- `__attribute__ ((__packed__))`取消编译阶段的内存优化对齐功能
+- [DHT 分布式哈希表](http://colobu.com/2018/03/26/distributed-hash-table/)
+- [VT-tree、bLSM、PE、PCP、dCompaction；对于所有基于 LSM-tree 的存储引擎而言；其在内存中会维护多个 memtable，所有新写入的数据都会追加到 memtable ，而不是直接替换掉现有的记录](https://mp.weixin.qq.com/s/DnurlGgd5q4Fwjxy3YnIrQ)
+- db benchmark: DbBench, YCSB, TPC-C （100 warehouses）, SysBench
+- 即席查询：指那些用户在使用系统时，根据自己当时的需求定义的查询
+- [mysql索引最左匹配原则(最左前缀匹配)](https://www.zhihu.com/question/36996520)
+- 表驱动法
+- [GeoHash地理位置相关的服务](http://wdxtub.com/2016/09/07/geohash-guide/)
+- 微服务调用链：研发通过trace query进行调用链查询
+- caching algorithms (LRU, MRU, LFU, MFU)
+- python3(函数注解Function Annotations)
+- SafeMath to protect from overflows
+- 表达式引擎：ess、beanshell
+- 双向 TLS 跟 Docker Daemon 通信, 保证接口安全性 https://github.com/icbd/secretube
+- Redis sorted set 的内部使用 HashMap 和跳跃表 (SkipList) 来保证数据的存储和有序
+- 常量传播、常量折叠
+- 单机存储引擎：RocksDB
+- PostGIS 地理位置查询
+- 免密码登录需要远程机器权限满足以下三个条件：`/home/{remote_user} 755`，`~/.ssh 700`，`~/.ssh/authorized_keys 644 或 600`
+- [蓝绿部署、A/B 测试以及灰度发布](https://www.v2ex.com/t/344341)
+- [为什么引入泛型](https://juejin.im/entry/584abdff61ff4b0058d50547#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BC%95%E5%85%A5%E6%B3%9B%E5%9E%8B)
+- 2N + 1 个备用服务器或者 2N + M 个备用服务器：这是用于 HotStandby 的“备用节点”方案。有 N 个 HotStandby 对，即，每个主服务器都有一个辅助服务器。此外，有 M 个备用服务器，其中 M 至少应为 1，但是通常小于 N。当一个主服务器或辅助服务器失败时，就会将一个备用服务器作为新的辅助服务器。因此，主服务器决不会长时间独立运行，即使它原来的伙伴服务器失败也是如此。
+- [Redis 与网络流量整形](https://zhongfox.github.io/2016/09/18/redis-in-action/)
+- 簇类索引
+- [京东自营与FBP、LBP、SOP、SOPL的关系？](https://www.zhihu.com/question/52379101/answer/301998347)
+- [消息队列设计精要](https://tech.meituan.com/mq-design.html)、消息队列服务端
+- [使用 Redis 统计在线用户人数](http://blog.huangz.me/diary/2016/redis-count-online-users.html)
+- [LOAD DATA INFILE Syntax](https://dev.mysql.com/doc/refman/5.7/en/load-data.html), [Fastest Way To Load Data In MySQL](http://shopperplus.github.io/blog/2014/11/08/fastest-way-to-load-data-in-mysql.html)
+- 路径又称"终点"（endpoint），表示API的具体网址。
+- 索引基数（Cardinality）/ 覆盖索引(convering index)
+- 指标监控有 Prometheus、InfluxDB，链路监控有 Zipkin、Pinpoint，日志则有 ELK
+- 黑盒监控/白盒监控 / APM [51信用卡在微服务架构下的监控平台架构实践](https://mp.weixin.qq.com/s/AXI_FAhg2SaU5HHFtdxFnQ)
+- [autovacuum， dead tuple](https://ruby-china.org/topics/36829)
+- 锁重入策略
+- 一致性哈希
